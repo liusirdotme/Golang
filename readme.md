@@ -84,4 +84,41 @@ func TestPerm(t *testing.T) {
  * 维护一个已拼图的map结果，每次放置或取下则更新此map
 
  
+```
+// 每一个拼图小格子
+type Block struct {
+	Id int `Block Id`
+	Top int `Top value(-1 0 1)`
+	Bottom int `Bottom value(-1 0 1)`
+	Left int  `Left value(-1 0 1)`
+	Right int `Right value(-1 0 1)`
+}
 
+func (b *Block) put(rec *Rectangle, x, y int) (bool, error){
+	if x < 0 || y < 0 || x > rec.length || y > rec.width {
+		panic("position error")
+	}
+	// 每次放置分别进行一次X轴和Y轴方向上的计算
+	// X轴之和和Y轴之和分别等于0，进一步判断已放置块数是否和矩形长宽是否相等
+	// X轴之和和Y轴之和有一个不为0则不完整
+	return true, nil
+}
+
+func (b *Block) remove(rec *Rectangle, x, y int) (bool, error){
+	if x < 0 || y < 0 || x > rec.length || y > rec.width {
+		panic("position error")
+	}
+	// 每次取下分别进行一次X轴和Y轴方向上的计算，对map结构进行维护更新
+	return true, nil
+}
+
+// 矩形
+type Rectangle struct {
+	length int
+	width int
+}
+
+func (rec *Rectangle) Finish() bool{
+	return false
+}
+```
